@@ -1,0 +1,14 @@
+extends base
+
+block body
+  h3
+    a(href="/") RetroTube
+  form(action="/search", method="post")
+    input(type="text", name="query", data-i-search-input="true", placeholder="Search Videos")
+    input(type="submit", value="Search")
+  h1= video.name
+  embed(src=`/embed/stream.asx`, width=`${width}`, height=`${height}`, autostart="true", showStatusBar="true", volume="100")
+  p
+    | !{video.description}
+  p Likes: #{video.likeCount}
+  p Views: #{video.viewCount}

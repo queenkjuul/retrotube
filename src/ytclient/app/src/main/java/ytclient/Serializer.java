@@ -178,16 +178,21 @@ public class Serializer {
     }
 
     public static void streamExtractorToJsonObject(JsonObject object, StreamExtractor streamExtractor) throws ExtractionException, IOException {
+        object.put("name", streamExtractor.getName());
+
         JsonArray jsonAudioStreams = new JsonArray();
         streamsToJsonArray(jsonAudioStreams, streamExtractor.getAudioStreams());
         object.put("audioStreams", jsonAudioStreams);
+
         object.put("description", streamExtractor.getDescription().getContent());
         object.put("ageLimit", streamExtractor.getAgeLimit());
         object.put("category", streamExtractor.getCategory());
+
         JsonArray jsonRelatedItems = new JsonArray();
         List<InfoItem> relatedItems = ((YoutubeStreamExtractor) streamExtractor).getRelatedItems().getItems();
         infoItemsToJsonArray(jsonRelatedItems, relatedItems);
         object.put("relatedItems", jsonRelatedItems);
+
         object.put("dashMpdUrl", streamExtractor.getDashMpdUrl());
         object.put("dislikeCount", streamExtractor.getDislikeCount());
         object.put("errorMessage", streamExtractor.getErrorMessage());
